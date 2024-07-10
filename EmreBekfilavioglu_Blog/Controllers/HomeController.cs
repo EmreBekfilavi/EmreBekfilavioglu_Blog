@@ -1,6 +1,7 @@
 using EmreBekfilavioglu_Blog.DAL;
 using EmreBekfilavioglu_Blog.Models;
 using EmreBekfilavioglu_Blog.Models.Identity;
+using EmreBekfilavioglu_Blog.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
@@ -18,11 +19,36 @@ namespace EmreBekfilavioglu_Blog.Controllers
 			_context = context;
 		}
 
-		public IActionResult Index()
+		public IActionResult Index(int id = 0)
 		{
 			List<Makale> makaleler = _context.Makaleler.Include(x=> x.Uye).OrderByDescending(x=>x.YazimTarihi).ToList();
 
-			return View(makaleler);
+			Sayfala_VM sayfalaVM = new Sayfala_VM();
+
+			sayfalaVM.KayitSayisi = 4;
+
+			if (makaleler.Count % sayfalaVM.KayitSayisi == 0)
+			{
+				sayfalaVM.SayfaAdedi = makaleler.Count / sayfalaVM.KayitSayisi;
+			}
+			else
+			{
+				sayfalaVM.SayfaAdedi = (makaleler.Count / sayfalaVM.KayitSayisi) + 1;
+			}
+
+
+			if (id == 0)
+			{
+				sayfalaVM.Makaleler = makaleler.Take(sayfalaVM.KayitSayisi).ToList();
+			}
+			else
+			{
+				sayfalaVM.Makaleler = makaleler.Skip(id * sayfalaVM.KayitSayisi).Take(sayfalaVM.KayitSayisi).ToList();
+			}
+
+
+
+			return View(sayfalaVM);
 		}
 
 		public IActionResult Hakkimizda()

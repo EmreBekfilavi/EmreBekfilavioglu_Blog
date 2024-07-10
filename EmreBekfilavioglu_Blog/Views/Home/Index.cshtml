@@ -1,8 +1,7 @@
-﻿@model IEnumerable<Makale>
+﻿@model Sayfala_VM
 
 @{
 	ViewData["Title"] = "AnaSayfa";
-	ViewData["ResimYolu"] = "assets/img/home-bg.jpg";
 }
 
 @if (TempData["GuncelleSonuc"] is not null)
@@ -24,7 +23,7 @@
 
 	<div class="col-md-10 col-lg-8 col-xl-7">
 
-        @foreach(Makale makale in Model)
+        @foreach(Makale makale in Model.Makaleler)
         {
             <div class="post-preview">
                 <a asp-route-id ="@makale.MakaleID" asp-controller="Home" asp-action="MakaleOku">
@@ -41,7 +40,10 @@
         }
 
         @*Buranın Algoritması İstenmediği İçin Kurulmadı...*@
-        <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Daha Cok Goruntule →</a></div>
+        @for (int i = 0; i < Model.SayfaAdedi; i++)
+        {
+            <a asp-action="Index" asp-route-id="@i" class="btn btn-light">@(i + 1)</a>
+        }
         <!-- Post preview-->
         
 
