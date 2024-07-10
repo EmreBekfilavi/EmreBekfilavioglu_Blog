@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Makale>
+
+@{
+    ViewData["Title"] = "İlginiÇekebilecekler";
+    ViewData["ResimYolu"] = "assets/img/home-bg.jpg";
+}
+
+
+
+<div class="row gx-4 gx-lg-5 justify-content-center">
+
+    <div class="col-md-10 col-lg-8 col-xl-7">
+
+        @foreach (Makale makale in Model)
+        {
+            <div class="post-preview">
+                <a asp-route-id="@makale.MakaleID" asp-controller="Home" asp-action="MakaleOku">
+                    <h2 class="post-title">@makale.Baslik</h2>
+
+                </a>
+                <p class="post-meta">
+                    Yazan Uye
+                    <a asp-route-id="@makale.UyeID" asp-controller="Home" asp-action="YazanUyeGoruntule"> @makale.Uye.UyeAdi, @makale.Uye.UyeSoyadi</a>
+                    on @makale.YazimTarihi
+                    &middot @makale.OkumaSuresi Dakika Okuma
+                </p>
+            </div>
+        }
+
+        @*Buranın Algoritması İstenmediği İçin Kurulmadı...*@
+        <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Daha Cok Goruntule →</a></div>
+        <!-- Post preview-->
+
+
+    </div>
+
+</div>
+

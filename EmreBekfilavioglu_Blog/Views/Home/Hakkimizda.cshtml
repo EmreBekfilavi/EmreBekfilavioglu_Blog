@@ -1,0 +1,34 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<Uye> SignInManager
+
+@{
+	ViewData["Title"] = "Hakkımızda";
+	ViewData["ResimYolu"] = "assets/img/about-bg.jpg";
+}
+
+
+<!-- Main Content-->
+<main class="mb-4">
+	<div class="container px-4 px-lg-5">
+		<div class="row gx-4 gx-lg-5 justify-content-center">
+			<div class="col-md-10 col-lg-8 col-xl-7">
+				<p>Merhaba! EmreBlog'a hoş geldiniz. Ben Emre, bu blogun arkasındaki tutkulu yazar ve içerik üreticisiyim. EmreBlog, hayatın her alanında bilgi ve ilham arayanlar için kurulmuş bir platformdur. Amacımız, okurlarımıza güncel ve faydalı bilgiler sunarak hayatlarını kolaylaştırmak ve zenginleştirmektir. Teknolojiden sağlığa, seyahatten kişisel gelişime kadar geniş bir yelpazede konuları ele alıyoruz.</p>
+				<p>EmreBlog'da yer alan içerikler, titizlikle araştırılmış ve özenle kaleme alınmıştır. Her yazıda, okuyucularımızın ilgisini çekebilecek ve hayatlarına değer katabilecek bilgiler sunmayı hedefliyoruz. İster yeni bir hobiyi keşfetmek isteyin, ister güncel teknoloji trendlerini takip edin, burada sizin için mutlaka bir şeyler bulacaksınız. Ayrıca, blogumuzda yer alan rehberler ve ipuçları sayesinde günlük yaşamınızda pratik çözümler bulabilirsiniz.</p>
+				<p>
+					Siz değerli okurlarımızın geri bildirimleri ve yorumları, EmreBlog'un gelişiminde büyük bir rol oynamaktadır. Paylaşımlarımızla ilgili düşüncelerinizi bizimle paylaşmaktan çekinmeyin. Birlikte, daha büyük bir topluluk oluşturabilir ve bilgi alışverişini sürdürebiliriz. EmreBlog'u ziyaret ettiğiniz için teşekkür ederiz; umarız burada geçirdiğiniz zaman keyifli ve faydalı olur.
+
+				</p>
+
+				@if (!SignInManager.IsSignedIn(User))
+				{
+					<p>Hala Üye Olmadığınızı Görüyorum Daha Kapsamlı Erişim İçin Üye Olabilirsiniz!</p>
+					<a asp-controller="Login" asp-action="KayitOl" class="btn btn-info">Kayıt Ol</a>
+				}
+
+				
+
+
+			</div>
+		</div>
+	</div>
+</main>

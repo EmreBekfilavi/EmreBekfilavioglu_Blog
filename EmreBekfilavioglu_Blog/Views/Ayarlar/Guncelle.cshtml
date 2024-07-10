@@ -1,0 +1,64 @@
+﻿@model UyeGuncelle_VM
+
+@{
+    ViewData["Title"] = "Guncelle";
+}
+
+@if(TempData["GuncelleSonuc"] is not null)
+{
+    <h2 class="alert alert-danger text-center">@TempData["GuncelleSonuc"]</h2>
+}
+
+<h1 class="text-center text-warning">Guncelle</h1>
+
+<hr />
+<div class="row justify-content-center text-center">
+    <div class="col-md-4">
+        <form asp-action="Guncelle">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UyeAdi" class="control-label"></label>
+                <input asp-for="UyeAdi" class="form-control" />
+                <span asp-validation-for="UyeAdi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UyeSoyadi" class="control-label"></label>
+                <input asp-for="UyeSoyadi" class="form-control" />
+                <span asp-validation-for="UyeSoyadi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UyeAciklamasi" class="control-label"></label>
+                <input asp-for="UyeAciklamasi" class="form-control" />
+                <span asp-validation-for="UyeAciklamasi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UyeResmi" class="control-label"></label>
+                <input asp-for="UyeResmi" class="form-control" />
+                <span asp-validation-for="UyeResmi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="EMail" class="control-label"></label>
+                <input asp-for="EMail" class="form-control" />
+                <span asp-validation-for="EMail" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="UyeID" />
+            <div class="form-group">
+                <input type="submit" value="Kaydet" class="btn btn-warning mt-3" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="justify-content-center text-center mt-3">
+    <a asp-route-id="@Model.UyeID" asp-action="Detay">Profil Bilgilerime Geri Dön</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

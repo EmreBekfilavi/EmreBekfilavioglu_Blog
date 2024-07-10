@@ -1,0 +1,24 @@
+﻿@model Uye
+
+
+<div class="row">
+    <table class="table table-striped text-center">
+        <thead>
+            <tr>
+                <th>Yazilan Makaleler</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (Makale makale in Model.YazilanMakaleler)
+            {
+                <tr>
+                    <td>@makale.Baslik</td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+
+
