@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EmreBekfilavioglu_Blog.Areas.UyeAlani.Controllers
 {
-	[Authorize]
+	[Authorize(Roles = "Uye")]
 	public class KonuController : Controller
 	{
 		private readonly UserManager<Uye> userManager;

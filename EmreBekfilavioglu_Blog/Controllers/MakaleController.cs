@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EmreBekfilavioglu_Blog.Areas.UyeAlani.Controllers
 {
-	[Authorize]
+	[Authorize(Roles = "Uye")]
 	public class MakaleController : Controller
 	{
 		private readonly UserManager<Uye> _userManager;
@@ -90,7 +90,7 @@ namespace EmreBekfilavioglu_Blog.Areas.UyeAlani.Controllers
 			return View(uye);
 		}
 
-		public IActionResult İlgiliMakaleler()
+		public IActionResult İlgiliMakaleler(int sayfaId=0)
 		{
 			int id = int.Parse(_userManager.GetUserId(User));
 			List<KonuUye> uyeKonulari = _context.KonuUyeler.Where(x => x.UyeID.Equals(id)).ToList();
@@ -113,9 +113,32 @@ namespace EmreBekfilavioglu_Blog.Areas.UyeAlani.Controllers
 				}
 			}
 
+			Sayfala_VM sayfalaVM = new Sayfala_VM();
+
+            sayfalaVM.KayitSayisi = 4;
+
+            if (ilgiCekebilecek.Count % sayfalaVM.KayitSayisi == 0)
+            {
+                sayfalaVM.SayfaAdedi = ilgiCekebilecek.Count / sayfalaVM.KayitSayisi;
+            }
+            else
+            {
+                sayfalaVM.SayfaAdedi = (ilgiCekebilecek.Count / sayfalaVM.KayitSayisi) + 1;
+            }
 
 
-			return View(ilgiCekebilecek.Take(5).OrderByDescending(x=>x.YazimTarihi));
+            if (sayfaId == 0)
+            {
+                sayfalaVM.Makaleler = ilgiCekebilecek.Take(sayfalaVM.KayitSayisi).OrderByDescending(x => x.YazimTarihi).ToList();
+            }
+            else
+            {
+                sayfalaVM.Makaleler = ilgiCekebilecek.Skip(id * sayfalaVM.KayitSayisi).Take(sayfalaVM.KayitSayisi).OrderByDescending(x=>x.YazimTarihi).ToList();
+            }
+
+
+
+            return View(sayfalaVM);
 		}
 
 

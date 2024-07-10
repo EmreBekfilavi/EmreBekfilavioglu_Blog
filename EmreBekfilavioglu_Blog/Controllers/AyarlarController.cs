@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EmreBekfilavioglu_Blog.Areas.UyeAlani.Controllers
 {
-	[Authorize]
+	[Authorize(Roles = "Uye")]
 	public class AyarlarController : Controller
 	{
 		private readonly SinavDBContext _context;
