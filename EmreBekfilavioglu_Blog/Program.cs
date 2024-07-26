@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<SinavDBContext>(option => option.UseSqlServer("Data Source = EmreS; Initial catalog = BlogSitesiDB; Integrated Security = True; TrustServerCertificate = True"));
+builder.Services.AddDbContext<SinavDBContext>(option => option.UseSqlServer("Data Source = .; Initial catalog = BlogSitesiDB; Integrated Security = True; TrustServerCertificate = True"));
 
 builder.Services
 	.AddIdentity<Uye, Rol>()
